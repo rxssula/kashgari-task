@@ -1,11 +1,13 @@
 import Map from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
+import AddExpenseForm from "./components/add-expense-form";
 
 function App() {
   return (
     <div className="h-screen flex">
-      <div className="max-w-[700px] min-w-[350px]">
-        <div className="text-2xl">Hello</div>
+      <div className="flex flex-col gap-4 max-w-[700px] min-w-[350px] p-4">
+        <div className="text-2xl text-center">Add Expense</div>
+        <AddExpenseForm />
       </div>
       <Map
         initialViewState={{
