@@ -19,6 +19,7 @@ import {
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
+import { GeocoderInput } from "./geocoder-input";
 
 const formSchema = z.object({
   category: z.enum(categoryTypes),
@@ -27,7 +28,8 @@ const formSchema = z.object({
     error: "A date of an expense is required",
   }),
   location: z.string(),
-  description: z.string(),
+  coordinates: z.tuple([z.number(), z.number()]).optional(),
+  description: z.string().optional(),
 });
 
 export default function AddExpenseForm() {
@@ -38,12 +40,29 @@ export default function AddExpenseForm() {
       amount: 0.0,
       date: new Date(),
       location: "",
+      coordinates: undefined,
       description: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
+  };
+
+  const handleLocationChange = (
+    location: string,
+    coordinates?: [number, number],
+  ) => {
+    form.setValue("location", location);
+    if (coordinates) {
+      form.setValue("coordinates", coordinates);
+    }
+  };
+
+  const handleCoordinatesChange = (coordinates: [number, number] | null) => {
+    if (coordinates) {
+      form.setValue("coordinates", coordinates);
+    }
   };
 
   return (
@@ -122,12 +141,37 @@ export default function AddExpenseForm() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Location</FormLabel>
+              <FormControl>
+                <GeocoderInput
+                  value={field.value}
+                  onChange={handleLocationChange}
+                  onCoordinatesChange={handleCoordinatesChange}
+                  placeholder="Search for a location or use current location"
+                  className="w-full"
+                />
+              </FormControl>
+              <FormDescription>
+                Search for the location where the expense occurred. You can also
+                use your current location.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Description of an expense"

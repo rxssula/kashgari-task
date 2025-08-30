@@ -1,5 +1,5 @@
-import Map from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { Map } from "react-map-gl/maplibre";
 import AddExpenseForm from "./components/add-expense-form";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <AddExpenseForm />
       </div>
       <Map
+        id="myMap"
         initialViewState={{
           longitude: -122.4,
           latitude: 37.8,
@@ -17,7 +18,7 @@ function App() {
         }}
         style={{ height: "100%" }}
         mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`}
-      />
+      ></Map>
     </div>
   );
 }
