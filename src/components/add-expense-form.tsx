@@ -1,9 +1,12 @@
+import { useExpenses } from "@/hooks/useExpenses";
 import { cn } from "@/lib/utils";
+import { formSchema } from "@/types/zod/add-expense-form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { GeocoderInput } from "./geocoder-input";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import {
@@ -18,11 +21,10 @@ import {
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
-import { GeocoderInput } from "./geocoder-input";
-import { formSchema, type Expense } from "@/types/zod/add-expense-form-schema";
-import { EXPENSE_LIST_KEY } from "@/constants";
 
 export default function AddExpenseForm() {
+  const { addExpense } = useExpenses();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
@@ -36,17 +38,7 @@ export default function AddExpenseForm() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const prevExpensesItem = localStorage.getItem(EXPENSE_LIST_KEY);
-    if (!prevExpensesItem) {
-      const newExpense = JSON.stringify([values]);
-      localStorage.setItem(EXPENSE_LIST_KEY, newExpense);
-      form.reset();
-      return;
-    }
-
-    const newExpenses = JSON.parse(prevExpensesItem) as Expense[];
-    newExpenses.push(values);
-    localStorage.setItem(EXPENSE_LIST_KEY, JSON.stringify(newExpenses));
+    addExpense(values);
     form.reset();
   };
 

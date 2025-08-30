@@ -1,8 +1,13 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Map } from "react-map-gl/maplibre";
 import AddExpenseForm from "./components/add-expense-form";
+import { useExpenses } from "./hooks/useExpenses";
+import ExpenseMarkers from "./components/expense-markers";
 
 function App() {
+  const { expenses } = useExpenses();
+  console.log(expenses);
+
   return (
     <div className="h-screen flex">
       <div className="flex flex-col gap-4 max-w-[700px] min-w-[350px] p-4">
@@ -18,7 +23,9 @@ function App() {
         }}
         style={{ height: "100%" }}
         mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`}
-      ></Map>
+      >
+        <ExpenseMarkers />
+      </Map>
     </div>
   );
 }
