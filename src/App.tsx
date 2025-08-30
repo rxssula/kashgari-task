@@ -3,7 +3,10 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 function App() {
   return (
-    <div className="h-screen">
+    <div className="h-screen flex">
+      <div className="max-w-[700px] min-w-[350px]">
+        <div className="text-2xl">Hello</div>
+      </div>
       <Map
         initialViewState={{
           longitude: -122.4,
