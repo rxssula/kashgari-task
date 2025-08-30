@@ -1,4 +1,3 @@
-import { categoryTypes } from "@/constants";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -20,21 +19,12 @@ import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
 import { GeocoderInput } from "./geocoder-input";
-
-const formSchema = z.object({
-  category: z.enum(categoryTypes),
-  amount: z.float32(),
-  date: z.date({
-    error: "A date of an expense is required",
-  }),
-  location: z.string(),
-  coordinates: z.tuple([z.number(), z.number()]).optional(),
-  description: z.string().optional(),
-});
+import { formSchema, type Expense } from "@/types/zod/add-expense-form-schema";
+import { EXPENSE_LIST_KEY } from "@/constants";
 
 export default function AddExpenseForm() {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       category: "Other",
       amount: 0.0,
@@ -46,7 +36,18 @@ export default function AddExpenseForm() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const prevExpensesItem = localStorage.getItem(EXPENSE_LIST_KEY);
+    if (!prevExpensesItem) {
+      const newExpense = JSON.stringify([values]);
+      localStorage.setItem(EXPENSE_LIST_KEY, newExpense);
+      form.reset();
+      return;
+    }
+
+    const newExpenses = JSON.parse(prevExpensesItem) as Expense[];
+    newExpenses.push(values);
+    localStorage.setItem(EXPENSE_LIST_KEY, JSON.stringify(newExpenses));
+    form.reset();
   };
 
   const handleLocationChange = (
@@ -91,7 +92,13 @@ export default function AddExpenseForm() {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="0.00" {...field} />
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 This is the amount of the expense.
