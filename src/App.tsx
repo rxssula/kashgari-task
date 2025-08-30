@@ -1,21 +1,18 @@
-import { SplitLayout } from "@googlemaps/extended-component-library/react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
-
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
+import Map from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 function App() {
   return (
     <div className="h-screen">
-      <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
-        <SplitLayout rowLayoutMinWidth={700}>
-          <div className="text-2xl h-full" slot="fixed">
-            Hello
-          </div>
-          <div className="h-full" slot="main">
-            <Map></Map>
-          </div>
-        </SplitLayout>
-      </APIProvider>
+      <Map
+        initialViewState={{
+          longitude: -122.4,
+          latitude: 37.8,
+          zoom: 14,
+        }}
+        style={{ height: "100%" }}
+        mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`}
+      />
     </div>
   );
 }
