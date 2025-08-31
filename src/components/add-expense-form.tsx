@@ -21,6 +21,14 @@ import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { categoryTypes } from "@/constants";
 
 interface IAddExpenseFormProps {
   addExpense: (expense: Expense) => void;
@@ -70,9 +78,18 @@ export default function AddExpenseForm({ addExpense }: IAddExpenseFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Category</FormLabel>
-              <FormControl>
-                <Input placeholder="Food" {...field} />
-              </FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a category of the expense" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categoryTypes.map((type) => (
+                    <SelectItem value={type}>{type}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormDescription>
                 This is the category of the expense.
               </FormDescription>

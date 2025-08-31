@@ -10,7 +10,9 @@ function App() {
   return (
     <div className="h-screen flex">
       <div className="flex flex-col gap-4 max-w-[700px] min-w-[350px] p-4">
-        <div className="text-2xl text-center">Add Expense</div>
+        <div className="flex justify-between">
+          <div className="text-2xl">Add Expense</div>
+        </div>
         <AddExpenseForm addExpense={addExpense} />
       </div>
       <Map
