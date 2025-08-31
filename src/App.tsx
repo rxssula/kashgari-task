@@ -5,13 +5,13 @@ import { useExpenses } from "./hooks/useExpenses";
 import ExpenseMarkers from "./components/expense-markers";
 
 function App() {
-  const { expenses } = useExpenses();
+  const { expenses, addExpense } = useExpenses();
 
   return (
     <div className="h-screen flex">
       <div className="flex flex-col gap-4 max-w-[700px] min-w-[350px] p-4">
         <div className="text-2xl text-center">Add Expense</div>
-        <AddExpenseForm />
+        <AddExpenseForm addExpense={addExpense} />
       </div>
       <Map
         id="myMap"

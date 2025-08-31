@@ -2,6 +2,7 @@ import { categoryTypes } from "@/constants";
 import { z } from "zod";
 
 export const formSchema = z.object({
+  id: z.string().optional(),
   category: z.enum(categoryTypes),
   amount: z.coerce.number().positive("Amount must be a positive number"),
   date: z.date({

@@ -1,6 +1,5 @@
-import { useExpenses } from "@/hooks/useExpenses";
 import { cn } from "@/lib/utils";
-import { formSchema } from "@/types/zod/add-expense-form-schema";
+import { formSchema, type Expense } from "@/types/zod/add-expense-form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -23,9 +22,11 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
 
-export default function AddExpenseForm() {
-  const { addExpense } = useExpenses();
+interface IAddExpenseFormProps {
+  addExpense: (expense: Expense) => void;
+}
 
+export default function AddExpenseForm({ addExpense }: IAddExpenseFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema) as any,
     defaultValues: {

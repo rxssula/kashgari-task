@@ -23,7 +23,11 @@ export const useExpenses = () => {
 
   const addExpense = (expense: Expense) => {
     setExpenses((prevExpenses) => {
-      const updatedExpenses = [...prevExpenses, expense];
+      const expenseWithId = {
+        ...expense,
+        id: crypto.randomUUID(),
+      };
+      const updatedExpenses = [...prevExpenses, expenseWithId];
       localStorage.setItem(EXPENSE_LIST_KEY, JSON.stringify(updatedExpenses));
       return updatedExpenses;
     });

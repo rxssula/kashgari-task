@@ -10,7 +10,7 @@ export default function ExpenseMarkers({ expenses }: IExpenseMarkersProps) {
     <>
       {expenses.map((expense) => (
         <Marker
-          key={`marker-${expense.location}`}
+          key={`marker-${expense.id}`}
           longitude={expense.coordinates![0]}
           latitude={expense.coordinates![1]}
         />
