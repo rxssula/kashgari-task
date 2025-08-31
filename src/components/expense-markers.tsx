@@ -1,13 +1,8 @@
 import type { Expense } from "@/types/zod/add-expense-form-schema";
 import { useState } from "react";
 import { Marker, Popup } from "react-map-gl/maplibre";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Badge } from "./ui/badge";
 import { colorsBasedOnCategory } from "@/constants";
 
 interface IExpenseMarkersWithPopupInfoProps {
@@ -43,13 +38,28 @@ export default function ExpenseMarkersWithPopupInfo({
           closeButton={false}
         >
           <Card className="w-full min-w-sm">
-            <CardHeader>
-              <CardTitle className={`text-xl`}>${popupInfo.amount}</CardTitle>
-              {popupInfo.description && (
-                <CardDescription>{popupInfo.description}</CardDescription>
-              )}
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl">${popupInfo.amount}</CardTitle>
+                <Badge variant="secondary" className="ml-2">
+                  {popupInfo.category}
+                </Badge>
+              </div>
             </CardHeader>
-            <CardContent>${popupInfo.amount}</CardContent>
+            <CardContent className="pt-0 space-y-3">
+              {popupInfo.description && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    Description
+                  </p>
+                  <p className="text-sm">{popupInfo.description}</p>
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Location</p>
+                <p className="text-sm">{popupInfo.location}</p>
+              </div>
+            </CardContent>
           </Card>
         </Popup>
       )}
