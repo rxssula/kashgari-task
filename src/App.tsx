@@ -6,7 +6,6 @@ import ExpenseMarkers from "./components/expense-markers";
 
 function App() {
   const { expenses } = useExpenses();
-  console.log(expenses);
 
   return (
     <div className="h-screen flex">
@@ -24,7 +23,7 @@ function App() {
         style={{ height: "100%" }}
         mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`}
       >
-        <ExpenseMarkers />
+        <ExpenseMarkers expenses={expenses} />
       </Map>
     </div>
   );

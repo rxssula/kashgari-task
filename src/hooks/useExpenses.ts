@@ -3,7 +3,13 @@ import type { Expense } from "@/types/zod/add-expense-form-schema";
 import { useCallback, useEffect, useState } from "react";
 
 export const useExpenses = () => {
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [expenses, setExpenses] = useState<Expense[]>(() => {
+    const savedExpenses = localStorage.getItem(EXPENSE_LIST_KEY);
+    if (!savedExpenses) {
+      return [];
+    }
+    return JSON.parse(savedExpenses);
+  });
 
   const loadExpenses = useCallback(() => {
     const storedExpenses = localStorage.getItem(EXPENSE_LIST_KEY);
@@ -15,13 +21,13 @@ export const useExpenses = () => {
     }
   }, []);
 
-  const addExpense = useCallback((expense: Expense) => {
+  const addExpense = (expense: Expense) => {
     setExpenses((prevExpenses) => {
       const updatedExpenses = [...prevExpenses, expense];
       localStorage.setItem(EXPENSE_LIST_KEY, JSON.stringify(updatedExpenses));
       return updatedExpenses;
     });
-  }, []);
+  };
 
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {

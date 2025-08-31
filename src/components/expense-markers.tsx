@@ -1,9 +1,11 @@
-import { useExpenses } from "@/hooks/useExpenses";
+import type { Expense } from "@/types/zod/add-expense-form-schema";
 import { Marker } from "react-map-gl/maplibre";
 
-export default function ExpenseMarkers() {
-  const { expenses } = useExpenses();
+interface IExpenseMarkersProps {
+  expenses: Expense[];
+}
 
+export default function ExpenseMarkers({ expenses }: IExpenseMarkersProps) {
   return (
     <>
       {expenses.map((expense) => (

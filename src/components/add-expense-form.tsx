@@ -21,6 +21,7 @@ import {
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Textarea } from "./ui/textarea";
+import { toast } from "sonner";
 
 export default function AddExpenseForm() {
   const { addExpense } = useExpenses();
@@ -40,6 +41,7 @@ export default function AddExpenseForm() {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     addExpense(values);
     form.reset();
+    toast("Expense has been created!");
   };
 
   const handleLocationChange = (
