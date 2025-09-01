@@ -10,6 +10,8 @@ Used **shadcn/ui** for a component library for beautiful yet simple style. Used 
 
 At the demo I saw 3d map and was curious which library is it. I considered three options: google maps API, maplibre-gl, mapbox-gl. At first I tried google maps API and it was okay. But I don't know why but I wanted to try something opensource lol. Then I was choosing between maplibre and mapbox and considered maplibre as a better choice because its open-source and have different map styles.
 
+Adding mobile responsive design was diffictult and I did it simple and tried my best to achieve better ux. Show Map and Show Menu buttons are simple and intuitive so I think this is okay.
+
 ## Appreciation
 
 It was fun working on this project because I didn't expect that simple expense tracker could be this interesting. Learned a lot of new things. Really appreciate the opportunity to work on this project. I mostly worked with NextJS and it was fun working only on client-side code.
