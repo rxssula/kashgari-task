@@ -46,7 +46,7 @@ function App() {
             zoom: 14,
           }}
           style={{ width: "100%", height: "100%" }}
-          mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`}
+          mapStyle={`https://basemaps.cartocdn.com/gl/positron-gl-style/style.json`}
         >
           <ExpenseMarkers expenses={expenses} />
         </Map>
