@@ -15,9 +15,13 @@ import { categoryColorMap } from "@/constants";
 
 interface IListExpensesProps {
   expenses: Expense[];
+  onExpenseClicked?: () => void;
 }
 
-export default function ListExpenses({ expenses }: IListExpensesProps) {
+export default function ListExpenses({
+  expenses,
+  onExpenseClicked,
+}: IListExpensesProps) {
   const { myMap } = useMap();
 
   const [date, setDate] = useState<DateRange | undefined>({
@@ -61,7 +65,10 @@ export default function ListExpenses({ expenses }: IListExpensesProps) {
             <Card
               key={expense.id || `${expense.date}-${expense.amount}`}
               className="w-full cursor-pointer"
-              onClick={() => myMap?.flyTo({ center: expense.coordinates })}
+              onClick={() => {
+                myMap?.flyTo({ center: expense.coordinates });
+                onExpenseClicked?.();
+              }}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">

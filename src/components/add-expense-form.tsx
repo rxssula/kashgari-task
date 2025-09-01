@@ -32,9 +32,13 @@ import { categoryTypes } from "@/constants";
 
 interface IAddExpenseFormProps {
   addExpense: (expense: Expense) => void;
+  onExpenseAdded?: () => void;
 }
 
-export default function AddExpenseForm({ addExpense }: IAddExpenseFormProps) {
+export default function AddExpenseForm({
+  addExpense,
+  onExpenseAdded,
+}: IAddExpenseFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     // eslint-disable-next-line
     resolver: zodResolver(formSchema) as any,
@@ -52,6 +56,7 @@ export default function AddExpenseForm({ addExpense }: IAddExpenseFormProps) {
     addExpense(values);
     form.reset();
     toast("Expense has been created!");
+    onExpenseAdded?.();
   };
 
   const handleLocationChange = (

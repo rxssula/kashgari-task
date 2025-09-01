@@ -38,7 +38,7 @@ export default function ExpenseMarkersWithPopupInfo({
           maxWidth="320px"
           closeButton={false}
         >
-          <Card className="w-full min-w-sm">
+          <Card className="w-full max-w-sm">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">${popupInfo.amount}</CardTitle>
