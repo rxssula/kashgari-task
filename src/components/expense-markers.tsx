@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Marker, Popup } from "react-map-gl/maplibre";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { colorsBasedOnCategory } from "@/constants";
+import { categoryColorMap, colorsBasedOnCategory } from "@/constants";
 import { format } from "date-fns";
 
 interface IExpenseMarkersWithPopupInfoProps {
@@ -42,7 +42,10 @@ export default function ExpenseMarkersWithPopupInfo({
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">${popupInfo.amount}</CardTitle>
-                <Badge variant="secondary" className="ml-2">
+                <Badge
+                  variant="outline"
+                  className={categoryColorMap[popupInfo.category]}
+                >
                   {popupInfo.category}
                 </Badge>
               </div>
