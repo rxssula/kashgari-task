@@ -1,5 +1,7 @@
 # Kashgari Task
 
+**Project link**: https://kashgari-task.vercel.app/
+
 ## How it's made
 
 Used **shadcn/ui** for a component library for beautiful yet simple style. Used **maplibre-gl** library for rendering the map. Used **nominatim** API for searching the location's longitude and latitude. Used **zod** for schema validation (used with form).
