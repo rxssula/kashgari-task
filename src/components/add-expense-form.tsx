@@ -36,6 +36,7 @@ interface IAddExpenseFormProps {
 
 export default function AddExpenseForm({ addExpense }: IAddExpenseFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
+    // eslint-disable-next-line
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
       category: "Other",
