@@ -1,69 +1,13 @@
-# React + TypeScript + Vite
+# Kashgari Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## How it's made
 
-Currently, two official plugins are available:
+Used **shadcn/ui** for a component library for beautiful yet simple style. Used **maplibre-gl** library for rendering the map. Used **nominatim** API for searching the location's longitude and latitude. Used **zod** for schema validation (used with form).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Difficulties
 
-## Expanding the ESLint configuration
+At the demo I saw 3d map and was curious which library is it. I considered three options: google maps API, maplibre-gl, mapbox-gl. At first I tried google maps API and it was okay. But I don't know why but I wanted to try something opensource lol. Then I was choosing between maplibre and mapbox and considered maplibre as a better choice because its open-source and have different map styles.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Appreciation
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+It was fun working on this project because I didn't expect that simple expense tracker could be this interesting. Learned a lot of new things. Really appreciate the opportunity to work on this project. I mostly worked with NextJS and it was fun working only on client-side code.
