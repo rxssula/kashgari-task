@@ -4,6 +4,7 @@ import { Marker, Popup } from "react-map-gl/maplibre";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { colorsBasedOnCategory } from "@/constants";
+import { format } from "date-fns";
 
 interface IExpenseMarkersWithPopupInfoProps {
   expenses: Expense[];
@@ -55,6 +56,10 @@ export default function ExpenseMarkersWithPopupInfo({
                   <p className="text-sm">{popupInfo.description}</p>
                 </div>
               )}
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Date</p>
+                <p className="text-sm">{format(popupInfo.date, "PPP")}</p>
+              </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Location</p>
                 <p className="text-sm">{popupInfo.location}</p>
